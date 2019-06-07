@@ -8,11 +8,141 @@
 <p><span><iframe allowfullscreen="allowfullscreen" height="314" src="//www.youtube.com/embed/-iTVgyhyux8" width="560"></iframe></span></p>
 <p><span></span></p>
 <p><span></span></p><h1>Onshape 協同操作</h1>
-<p> </p>
-<p></p><h1>V-rep 模擬</h1>
-<p></p>
-<p></p>
-<h1>Github 倉儲管理</h1>
+<p>在繪圖部分由於本身就是在網路上作圖，所以對於成員在同一時間各自操作各自的甚至是一同修改同一個圖檔也沒問題，遇到修改馬上更新對於我們最直接的好處就是不會有衝突的問題發生。</p>
+<p>繪圖過程:</p>
+<p><iframe allowfullscreen="allowfullscreen" height="314" src="//www.youtube.com/embed/l5HXjuSZNig" width="560"></iframe></p>
+<p>在匯出的過程需要注意圖檔需求，如果是STL的話有分成個別轉出或合併轉出，當在組合圖的部分設定個別轉出時會全部零件分開來，每個零件的原點會在個別的原點上，當用合併轉出時，將會在組合圖座標原點的相對位置。</p>
+<p><strong>合併轉出丟入V-rep結果</strong></p>
+<p><img alt="" height="638" src="/images/單一.jpg" width="938"/></p>
+<p><strong>個別轉出丟入V-rep結果</strong></p>
+<p><span><img alt="" height="642" src="/images/多個.jpg" width="717"/></span></p><h1>V-rep 模擬</h1>
+<p>在完成繪圖的部分後，進行了自己的送球機構模擬。</p>
+<p><iframe allowfullscreen="allowfullscreen" height="314" src="//www.youtube.com/embed/VNxQo9RTClY" width="560"></iframe></p>
+<p><strong>部分講解:</strong></p>
+<p>1.開啟旋轉軸</p>
+<p><img alt="" height="366" src="/images/開啟旋轉軸.jpg" width="334"/></p>
+<p>2.將軸放在需要做旋轉的物件上並將分支樹裡相對應的物件放進軸裡。</p>
+<p><img alt="" height="323" src="/images/軸放這.jpg" width="296"/></p>
+<p>3.將物件設定干涉(如不需模擬或例如不動的本體就不需打開Body is dynamic)</p>
+<p><img alt="" height="590" src="/images/設定干涉.jpg" width="376"/></p>
+<p>4.設定球與撥桿時需要進行物理的參數<span>Body is dynamic就須開啟。</span></p>
+<p><img alt="" height="593" src="/images/開啟物理特性.jpg" width="383"/></p>
+<p>5.如發現撥桿的轉速太慢可修改轉速，而球的重量太重可以修改撥桿軸的扭力。</p>
+<p><img alt="" height="492" src="/images/調整軸參數.jpg" width="379"/></p>
+<p>6.之後發現模擬呈現不順時，修改元件的簡化程度。</p>
+<p><img alt="" height="208" src="/images/簡化.jpg" width="383"/></p>
+<p>7.用來調整元件的簡化程度，越簡化越能提升電腦運算的效率，但簡化太多易造成模擬瑕疵</p>
+<p><img alt="" height="150" src="/images/簡化程度.jpg" width="373"/></p>
+<p></p><h1>Github 倉儲管理</h1>
 <p><span></span></p>
 <p><span></span></p>
 <h1>程式開發</h1>
+<p>程式開發的部分因參與的時間較晚，所以學的東西並沒有像V-rep模擬與Onshape來的那麼深入，看得懂部分程式與參數修改。</p>
+<p><iframe allowfullscreen="allowfullscreen" height="314" src="//www.youtube.com/embed/wO7ZkJahRqY" width="560"></iframe></p>
+<p>程式碼</p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">import vrep
+import sys, math
+import keyboard
+# child threaded script: 
+# 內建使用 port 19997 若要加入其他 port, 在  serve 端程式納入
+#simExtRemoteApiStart(19999)
+  
+vrep.simxFinish(-1)
+  
+clientID = vrep.simxStart('127.0.0.1', 19997, True, True, 5000, 5)
+KickBallV = 360  
+#揮棒速度
+Move_Minus =-0.1        
+Move_Plus =0.1
+n=1
+R_KickBallVel = (math.pi/180)*KickBallV
+#揮棒後球速
+B_KickBallVel = -(math.pi/180)*KickBallV
+if clientID!= -1:
+    print("Connected to remote server")
+else:
+    print('Connection not successful')
+    sys.exit('Could not connect')
+
+errorCode,Sphere_handle=vrep.simxGetObjectHandle(clientID,'Sphere',vrep.simx_opmode_oneshot_wait)
+errorCode,P1_handle=vrep.simxGetObjectHandle(clientID,'P1',vrep.simx_opmode_oneshot_wait)
+errorCode,A1_handle=vrep.simxGetObjectHandle(clientID,'A1',vrep.simx_opmode_oneshot_wait)
+errorCode,R1_handle=vrep.simxGetObjectHandle(clientID,'R1',vrep.simx_opmode_oneshot_wait)
+errorCode,B1_handle=vrep.simxGetObjectHandle(clientID,'B1',vrep.simx_opmode_oneshot_wait)
+errorCode,P2_handle=vrep.simxGetObjectHandle(clientID,'P2',vrep.simx_opmode_oneshot_wait)
+errorCode,A2_handle=vrep.simxGetObjectHandle(clientID,'A2',vrep.simx_opmode_oneshot_wait)
+errorCode,R2_handle=vrep.simxGetObjectHandle(clientID,'R2',vrep.simx_opmode_oneshot_wait)
+errorCode,B2_handle=vrep.simxGetObjectHandle(clientID,'B2',vrep.simx_opmode_oneshot_wait)
+
+if errorCode == -1:
+    print('Can not find left or right motor')
+    sys.exit()
+def start():
+    errorCode = vrep.simxStartSimulation(clientID,vrep.simx_opmode_oneshot_wait)
+
+def stop():
+    errorCode = vrep.simxStartSimulation(clientID,vrep.simx_opmode_oneshot_wait)
+
+def pause():
+    errorCode = vrep.simxStartSimulation(clientID,vrep.simx_opmode_oneshot_wait)
+
+def getballposition():
+    errorCode,position_A1R=vrep.simxGetObjectPosition(clientID,A1_handle,-1,vrep.simx_opmode_oneshot)
+    errorCode,position_S=vrep.simxGetObjectPosition(clientID,Sphere_handle,-1,vrep.simx_opmode_oneshot)
+    A1v=position_S[1] - position_A1R[1]
+    AA1v=position_S[0] - position_A1R[0]
+    while True:
+        if A1v &lt;= 0 and AA1v &lt;= 0.015:
+            errorCode,position_A1R=vrep.simxGetObjectPosition(clientID,A1_handle,-1,vrep.simx_opmode_oneshot)
+            errorCode,position_S=vrep.simxGetObjectPosition(clientID,Sphere_handle,-1,vrep.simx_opmode_oneshot)
+            A1v =position_S[1]- position_A1R[1]
+            AA1v =position_S[0] - position_A1R[0]
+            vrep.simxSetJointTargetVelocity(clientID,R1_handle,R_KickBallVel,vrep.simx_opmode_oneshot_wait)
+          
+        elif A1v &gt; 0 and AA1v &lt;= 0.015:
+            errorCode,position_A1R=vrep.simxGetObjectPosition(clientID,A1_handle,-1,vrep.simx_opmode_oneshot)
+            errorCode,position_S=vrep.simxGetObjectPosition(clientID,Sphere_handle,-1,vrep.simx_opmode_oneshot)
+            A1v =position_S[1]- position_A1R[1]
+            AA1v =position_S[0] - position_A1R[0]
+            vrep.simxSetJointTargetVelocity(clientID,R1_handle,R_KickBallVel,vrep.simx_opmode_oneshot_wait)
+              
+        elif A1v &lt;= 0 and AA1v &gt; 0.015:
+            errorCode,position_A1R=vrep.simxGetObjectPosition(clientID,A1_handle,-1,vrep.simx_opmode_oneshot)
+            errorCode,position_S=vrep.simxGetObjectPosition(clientID,Sphere_handle,-1,vrep.simx_opmode_oneshot)
+            A1v =position_S[1]- position_A1R[1]
+            AA1v =position_S[0] - position_A1R[0]
+            vrep.simxSetJointTargetVelocity(clientID,R1_handle,B_KickBallVel,vrep.simx_opmode_oneshot_wait)
+          
+        elif A1v &gt; 0 and AA1v &gt; 0.015:
+            errorCode,position_A1R=vrep.simxGetObjectPosition(clientID,A1_handle,-1,vrep.simx_opmode_oneshot)
+            errorCode,position_S=vrep.simxGetObjectPosition(clientID,Sphere_handle,-1,vrep.simx_opmode_oneshot)
+            A1v =position_S[1]- position_A1R[1]
+            AA1v =position_S[0] - position_A1R[0]
+            vrep.simxSetJointTargetVelocity(clientID,R1_handle,B_KickBallVel,vrep.simx_opmode_oneshot_wait)
+            
+        try:
+            if keyboard.is_pressed('w'): 
+                vrep.simxSetJointTargetVelocity(clientID,R2_handle,R_KickBallVel,vrep.simx_opmode_oneshot_wait)
+            elif keyboard.is_pressed('x'):  
+                vrep.simxSetJointTargetVelocity(clientID,R2_handle,B_KickBallVel,vrep.simx_opmode_oneshot_wait)
+            elif keyboard.is_pressed('d'):  
+                vrep.simxSetJointTargetVelocity(clientID,P2_handle,0.05,vrep.simx_opmode_oneshot_wait)
+            elif keyboard.is_pressed('s'):
+                vrep.simxSetJointTargetVelocity(clientID,P2_handle,0,vrep.simx_opmode_oneshot_wait)
+            elif keyboard.is_pressed('a'):  
+                vrep.simxSetJointTargetVelocity(clientID,P2_handle,-0.05,vrep.simx_opmode_oneshot_wait)
+            else:
+                pass
+        except:
+            break
+            
+        MMMB = A1v*-2
+        vrep.simxSetJointTargetVelocity(clientID,P1_handle,MMMB,vrep.simx_opmode_oneshot_wait)
+
+vrep.simxSetJointTargetVelocity(clientID,R1_handle,0,vrep.simx_opmode_oneshot_wait)
+vrep.simxSetJointTargetVelocity(clientID,P2_handle,0,vrep.simx_opmode_oneshot_wait)
+
+start()
+getballposition()
+stop()</pre>
+<p></p>
