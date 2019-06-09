@@ -2,14 +2,15 @@
 <p><span></span>在學期末前總共學了Onshape、V-rep操作、以及Github的管理，在本網頁終將會呈現本學期所學到的內容與實際操作的問題。在小組分組的主要任務中分配到手足球裡的送球機構設計與繪製，在繪製時對Onshape的使用上也有了不少心得。</p>
 <p><img alt="" height="325" src="/images/發球機構修改.jpg" width="451"/></p>
 <h1>學員出席</h1>
+<p><span style="color: #ff0000;"><strong>整學期皆有到課且每周更新  (20%)</strong></span></p>
 <p>以下記錄了我在這學期裡所有的刷卡紀錄與推送紀錄，證明在每個禮拜確實到教室與組員進行每周的所排定的任務。</p>
 <p><strong>Github推送紀錄</strong></p>
 <p><span><img alt="" height="236" src="/images/推送紀錄.jpg" width="449"/></span></p>
 <p><strong>點名紀錄</strong></p>
 <p><span><iframe allowfullscreen="allowfullscreen" height="314" src="//www.youtube.com/embed/-iTVgyhyux8" width="560"></iframe></span></p>
 <p><span></span></p>
-<p><span></span></p>
-<h1>Onshape 協同操作</h1>
+<p><span></span></p><h1>Onshape 協同操作</h1>
+<p><span style="color: #ff0000;"><strong>確實完成自己分配所繪製的工作並紀錄影片 (15%)</strong></span></p>
 <p>在繪圖部分由於本身就是在網路上作圖，所以對於成員在同一時間各自操作各自的甚至是一同修改同一個圖檔也沒問題，遇到修改馬上更新對於我們最直接的好處就是不會有衝突的問題發生。</p>
 <p>繪圖過程:</p>
 <p><iframe allowfullscreen="allowfullscreen" height="314" src="//www.youtube.com/embed/l5HXjuSZNig" width="560"></iframe></p>
@@ -17,8 +18,8 @@
 <p><strong>合併轉出丟入V-rep結果</strong></p>
 <p><img alt="" height="638" src="/images/單一.jpg" width="938"/></p>
 <p><strong>個別轉出丟入V-rep結果</strong></p>
-<p><span><img alt="" height="642" src="/images/多個.jpg" width="717"/></span></p>
-<h1>V-rep 模擬</h1>
+<p><span><img alt="" height="642" src="/images/多個.jpg" width="717"/></span></p><h1>V-rep 模擬</h1>
+<p><strong><span style="color: #ff0000;">完成送球機構V-rep模擬工作並學會如何簡化圖檔  (15%)</span></strong></p>
 <p>在完成繪圖的部分後，進行了自己的送球機構模擬。</p>
 <p><iframe allowfullscreen="allowfullscreen" height="314" src="//www.youtube.com/embed/VNxQo9RTClY" width="560"></iframe></p>
 <p><strong>部分講解:</strong></p>
@@ -36,124 +37,17 @@
 <p><img alt="" height="208" src="/images/簡化.jpg" width="383"/></p>
 <p>7.用來調整元件的簡化程度，越簡化越能提升電腦運算的效率，但簡化太多易造成模擬瑕疵</p>
 <p><img alt="" height="150" src="/images/簡化程度.jpg" width="373"/></p>
-<p></p>
-<h1>Github 倉儲管理</h1>
+<p></p><h1>Github 倉儲管理</h1>
+<p><span style="color: #ff0000;"><strong>確實每周持續更新小組  (15%)</strong></span></p>
 <p><span></span>第三組分組倉儲:<a href="https://github.com/mdekmol/cd2019a-task1-2019cda_t1_g3_1">https://github.com/mdekmol/cd2019a-task1-2019cda_t1_g3_1</a></p>
 <p>在分組的倉儲裡每周持續更新內容上去，十六周將東西整理好更新最後成果上去。</p>
 <p><img alt="" height="236" src="/images/chrome_2019-06-10_00-12-48.jpg" width="450"/></p>
 <p>組長Fork倉儲:<a href="https://github.com/40623128/cd2019a">https://github.com/40623128/cd2019a</a></p>
 <p>除了剛建立時，試推了東西確認沒問題，接下來就等全部任務結束後進行最後的推送而確定沒問題後交由組長與班級網頁做推送的工作。</p>
 <p><span><img alt="" height="233" src="/images/chrome_2019-06-10_00-14-14.jpg" width="450"/></span></p>
-<p><span>協同產品設計個人倉儲:<a href="https://github.com/40623156/56CC">https://github.com/40623156/56CC</a></span></p>
-<h1>程式開發</h1>
-<p>程式開發的部分因參與的時間較晚，所以學的東西並沒有像V-rep模擬與Onshape來的那麼深入，看得懂部分程式與參數修改。</p>
-<p><iframe allowfullscreen="allowfullscreen" height="314" src="//www.youtube.com/embed/wO7ZkJahRqY" width="560"></iframe></p>
-<p>程式碼</p>
-<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">import vrep
-import sys, math
-import keyboard
-# child threaded script: 
-# 內建使用 port 19997 若要加入其他 port, 在  serve 端程式納入
-#simExtRemoteApiStart(19999)
-  
-vrep.simxFinish(-1)
-  
-clientID = vrep.simxStart('127.0.0.1', 19997, True, True, 5000, 5)
-KickBallV = 360  
-#揮棒速度
-Move_Minus =-0.1        
-Move_Plus =0.1
-n=1
-R_KickBallVel = (math.pi/180)*KickBallV
-#揮棒後球速
-B_KickBallVel = -(math.pi/180)*KickBallV
-if clientID!= -1:
-    print("Connected to remote server")
-else:
-    print('Connection not successful')
-    sys.exit('Could not connect')
-
-errorCode,Sphere_handle=vrep.simxGetObjectHandle(clientID,'Sphere',vrep.simx_opmode_oneshot_wait)
-errorCode,P1_handle=vrep.simxGetObjectHandle(clientID,'P1',vrep.simx_opmode_oneshot_wait)
-errorCode,A1_handle=vrep.simxGetObjectHandle(clientID,'A1',vrep.simx_opmode_oneshot_wait)
-errorCode,R1_handle=vrep.simxGetObjectHandle(clientID,'R1',vrep.simx_opmode_oneshot_wait)
-errorCode,B1_handle=vrep.simxGetObjectHandle(clientID,'B1',vrep.simx_opmode_oneshot_wait)
-errorCode,P2_handle=vrep.simxGetObjectHandle(clientID,'P2',vrep.simx_opmode_oneshot_wait)
-errorCode,A2_handle=vrep.simxGetObjectHandle(clientID,'A2',vrep.simx_opmode_oneshot_wait)
-errorCode,R2_handle=vrep.simxGetObjectHandle(clientID,'R2',vrep.simx_opmode_oneshot_wait)
-errorCode,B2_handle=vrep.simxGetObjectHandle(clientID,'B2',vrep.simx_opmode_oneshot_wait)
-
-if errorCode == -1:
-    print('Can not find left or right motor')
-    sys.exit()
-def start():
-    errorCode = vrep.simxStartSimulation(clientID,vrep.simx_opmode_oneshot_wait)
-
-def stop():
-    errorCode = vrep.simxStartSimulation(clientID,vrep.simx_opmode_oneshot_wait)
-
-def pause():
-    errorCode = vrep.simxStartSimulation(clientID,vrep.simx_opmode_oneshot_wait)
-
-def getballposition():
-    errorCode,position_A1R=vrep.simxGetObjectPosition(clientID,A1_handle,-1,vrep.simx_opmode_oneshot)
-    errorCode,position_S=vrep.simxGetObjectPosition(clientID,Sphere_handle,-1,vrep.simx_opmode_oneshot)
-    A1v=position_S[1] - position_A1R[1]
-    AA1v=position_S[0] - position_A1R[0]
-    while True:
-        if A1v &lt;= 0 and AA1v &lt;= 0.015:
-            errorCode,position_A1R=vrep.simxGetObjectPosition(clientID,A1_handle,-1,vrep.simx_opmode_oneshot)
-            errorCode,position_S=vrep.simxGetObjectPosition(clientID,Sphere_handle,-1,vrep.simx_opmode_oneshot)
-            A1v =position_S[1]- position_A1R[1]
-            AA1v =position_S[0] - position_A1R[0]
-            vrep.simxSetJointTargetVelocity(clientID,R1_handle,R_KickBallVel,vrep.simx_opmode_oneshot_wait)
-          
-        elif A1v &gt; 0 and AA1v &lt;= 0.015:
-            errorCode,position_A1R=vrep.simxGetObjectPosition(clientID,A1_handle,-1,vrep.simx_opmode_oneshot)
-            errorCode,position_S=vrep.simxGetObjectPosition(clientID,Sphere_handle,-1,vrep.simx_opmode_oneshot)
-            A1v =position_S[1]- position_A1R[1]
-            AA1v =position_S[0] - position_A1R[0]
-            vrep.simxSetJointTargetVelocity(clientID,R1_handle,R_KickBallVel,vrep.simx_opmode_oneshot_wait)
-              
-        elif A1v &lt;= 0 and AA1v &gt; 0.015:
-            errorCode,position_A1R=vrep.simxGetObjectPosition(clientID,A1_handle,-1,vrep.simx_opmode_oneshot)
-            errorCode,position_S=vrep.simxGetObjectPosition(clientID,Sphere_handle,-1,vrep.simx_opmode_oneshot)
-            A1v =position_S[1]- position_A1R[1]
-            AA1v =position_S[0] - position_A1R[0]
-            vrep.simxSetJointTargetVelocity(clientID,R1_handle,B_KickBallVel,vrep.simx_opmode_oneshot_wait)
-          
-        elif A1v &gt; 0 and AA1v &gt; 0.015:
-            errorCode,position_A1R=vrep.simxGetObjectPosition(clientID,A1_handle,-1,vrep.simx_opmode_oneshot)
-            errorCode,position_S=vrep.simxGetObjectPosition(clientID,Sphere_handle,-1,vrep.simx_opmode_oneshot)
-            A1v =position_S[1]- position_A1R[1]
-            AA1v =position_S[0] - position_A1R[0]
-            vrep.simxSetJointTargetVelocity(clientID,R1_handle,B_KickBallVel,vrep.simx_opmode_oneshot_wait)
-            
-        try:
-            if keyboard.is_pressed('w'): 
-                vrep.simxSetJointTargetVelocity(clientID,R2_handle,R_KickBallVel,vrep.simx_opmode_oneshot_wait)
-            elif keyboard.is_pressed('x'):  
-                vrep.simxSetJointTargetVelocity(clientID,R2_handle,B_KickBallVel,vrep.simx_opmode_oneshot_wait)
-            elif keyboard.is_pressed('d'):  
-                vrep.simxSetJointTargetVelocity(clientID,P2_handle,0.05,vrep.simx_opmode_oneshot_wait)
-            elif keyboard.is_pressed('s'):
-                vrep.simxSetJointTargetVelocity(clientID,P2_handle,0,vrep.simx_opmode_oneshot_wait)
-            elif keyboard.is_pressed('a'):  
-                vrep.simxSetJointTargetVelocity(clientID,P2_handle,-0.05,vrep.simx_opmode_oneshot_wait)
-            else:
-                pass
-        except:
-            break
-            
-        MMMB = A1v*-2
-        vrep.simxSetJointTargetVelocity(clientID,P1_handle,MMMB,vrep.simx_opmode_oneshot_wait)
-
-vrep.simxSetJointTargetVelocity(clientID,R1_handle,0,vrep.simx_opmode_oneshot_wait)
-vrep.simxSetJointTargetVelocity(clientID,P2_handle,0,vrep.simx_opmode_oneshot_wait)
-
-start()
-getballposition()
-stop()</pre>
-<h1>心得</h1>
-<p>這學期的十人分組已不是上學期的五人分組那麼簡單，在分配個人任務越來越細，甚至是一樣東西多個人各自設計後，在裡面挑出一個最好的，此時自己的設計如何被大家都能接受就要費很大的心思，在製圖的尺寸修改小問題都很容易解決，但在經過期中的V-rep一步一步的教學後，突然要丟個自己設計的東西進行模擬還是需要組員的互相指導，對於PDF製作的問題也遇到很多問題，很感謝組員的互相幫忙，大家一起合作才有一份成功的報告。</p><h1>期末影片</h1>
+<p><span>協同產品設計個人倉儲:<a href="https://github.com/40623156/56CC">https://github.com/40623156/56CC</a></span></p><h1>程式開發</h1>
+<p><span style="color: #ff0000;"><strong>無參與程式開發 (0%)</strong></span></p>
+<p>程式開發的部分因參與的時間太晚，所以學的東西並沒有像V-rep模擬與Onshape來的那麼深入，經詢問同學後僅看得懂參數修改。</p>
+<p></p><h1>心得</h1>
+<p>這學期的十人分組已不是上學期的五人分組那麼簡單，在分配個人任務越來越細，此時自己的想法如何被大家都能接受就要費很大的心思，在製圖的尺寸修改小問題都很容易解決，但在經過期中的V-rep一步一步的教學後，突然要丟個小組設計的東西進行模擬還是需要組員的互相指導，對於PDF製作的問題也遇到很多問題，很感謝遇到了一群很有耐心組員互相幫忙，大家一起合作才有一份成功的報告。</p><h1>期末影片</h1>
 <p></p>
