@@ -49,9 +49,9 @@ def play():
         try:
             if keyboard.is_pressed('a'):
                 vrep.simxSetJointTargetVelocity(clientID,LRev_handle,L_KickBallVel,vrep.simx_opmode_oneshot_wait)
-            elif keyboard.is_pressed('l'):
+            elif keyboard.is_pressed('d'):
                 vrep.simxSetJointTargetVelocity(clientID,RRev_handle,R_KickBallVel,vrep.simx_opmode_oneshot_wait)
-            elif keyboard.is_pressed('UP'):
+            elif keyboard.is_pressed('s'):
                 vrep.simxSetJointTargetVelocity(clientID,Mo_handle,-10,vrep.simx_opmode_oneshot_wait)
             else:
                 vrep.simxSetJointTargetVelocity(clientID,RRev_handle,L_KickBallVel,vrep.simx_opmode_oneshot_wait)
